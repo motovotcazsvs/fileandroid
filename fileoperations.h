@@ -2,6 +2,7 @@
 #define FILEOPERATIONS_H
 
 #include <QObject>
+#include <qqml.h>
 
 class FileOperations : public QObject
 {

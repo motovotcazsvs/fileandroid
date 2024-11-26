@@ -8,6 +8,7 @@ FileOperations::FileOperations(QObject *parent) : QObject(parent)
 {
     // Визначаємо шлях до файлу в Documents каталозі
     filePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/testFile.txt";
+    //filePath = content://com.android.externalstorage.documents/tree/primary%3Aimgg%2F6038586442907648-1024x576~2.png;
 }
 
 void FileOperations::createFile()

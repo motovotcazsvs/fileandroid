@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     // Реєструємо FileOperations як об'єкт QML
-    qmlRegisterType<FileOperations>("com.example.fileoperations", 1, 0, "FileOperations");
+    qmlRegisterType<FileOperations>("io.qt.examples.backend", 1, 0, "FileOperations");
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
