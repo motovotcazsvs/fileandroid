@@ -4,11 +4,14 @@
 #include <QTextStream>
 #include <QDebug>
 
+
+#include <QtCore/private/qandroidextras_p.h>
+
+
 FileOperations::FileOperations(QObject *parent) : QObject(parent)
 {
-    // Визначаємо шлях до файлу в Documents каталозі
-    filePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/testFile.txt";
-    //filePath = content://com.android.externalstorage.documents/tree/primary%3Aimgg%2F6038586442907648-1024x576~2.png;
+    //filePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/testFile.txt";
+    filePath = "content://com.android.externalstorage.documents/tree/primary%3Ahey/testfile.txt";
 }
 
 void FileOperations::createFile()
@@ -33,18 +36,21 @@ void FileOperations::writeFile(const QString &data)
     } else {
         qWarning() << "Unable to write to file.";
     }
+
+
 }
 
 void FileOperations::readFile()
 {
     QFile file(filePath);
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    if (file.open(QIODevice::ReadOnly)) {
         QTextStream in(&file);
         QString content = in.readAll();
         file.close();
-        emit readFinished(content);
-        qDebug() << "Data read from file.";
+        qDebug() << "Data read from file." << content;
     } else {
         qWarning() << "Unable to read file.";
     }
 }
+
+

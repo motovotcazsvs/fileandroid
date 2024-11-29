@@ -1,6 +1,5 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QQmlContext>
 #include "FileOperations.h"
 
 int main(int argc, char *argv[])

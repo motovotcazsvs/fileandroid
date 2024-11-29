@@ -14,8 +14,8 @@ public:
     Q_INVOKABLE void writeFile(const QString &data);
     Q_INVOKABLE void readFile();
 
+
 signals:
-    void readFinished(const QString &content);
 
 private:
     QString filePath;
