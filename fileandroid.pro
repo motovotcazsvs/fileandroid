@@ -2,8 +2,9 @@ TEMPLATE = app
 
 QT += qml quick
 
-CONFIG += c++11
+include($$PWD/lib/shared_storage/shared_storage.pri)
 
+CONFIG += c++11
 
 SOURCES += main.cpp \
     fileoperations.cpp

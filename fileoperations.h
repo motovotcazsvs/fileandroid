@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+#include <documentfile.h>
+
 class FileOperations : public QObject
 {
     Q_OBJECT

@@ -7,8 +7,8 @@
 
 FileOperations::FileOperations(QObject *parent) : QObject(parent)
 {
-    filePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/testFile.txt";
-    //filePath = "content://com.android.externalstorage.documents/tree/primary%3Ahey/testfile.txt";
+    //filePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/testFile.txt";
+    filePath = "content://com.android.externalstorage.documents/tree/primary%3Ahey/testfile.txt";
     //uri = "content://com.android.externalstorage.documents/tree/primary%3Ahey/testfile.txt";
     //uri = "content://com.android.externalstorage.documents/document/primary%3Ahey%2Ftestfile.txt";
     //filePath = "content://com.android.externalstorage.documents/document/primary%3Ahey%2Ftestfile.txt";
