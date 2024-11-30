@@ -29,6 +29,21 @@ Window {
         }
     }
 
+    FileDialog {
+        id: fileDialog
+        currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0];
+        onAccepted: {
+            if (fileDialog.selectedFile) {
+                console.log("Обраний файл: " + fileDialog.selectedFile);
+            } else {
+                console.log("Не вибраний файл");
+            }
+        }
+        onRejected: {
+            console.log("Вибір файла скасовано");
+        }
+    }
+
     Column {
         spacing: 20
         anchors.centerIn: parent
@@ -54,13 +69,18 @@ Window {
         }
 
         Button {
-            text: "Permission"
+            text: "Permission1"
             onClicked: {
                 folderDialog.open();
             }
         }
 
-
+        Button {
+            text: "Permission2"
+            onClicked: {
+                fileDialog.open();
+            }
+        }
     }
 
 }

@@ -2,7 +2,6 @@
 #define FILEOPERATIONS_H
 
 #include <QObject>
-#include <qqml.h>
 
 class FileOperations : public QObject
 {
@@ -19,6 +18,7 @@ signals:
 
 private:
     QString filePath;
+    QString uri;
 };
 
 #endif // FILEOPERATIONS_H

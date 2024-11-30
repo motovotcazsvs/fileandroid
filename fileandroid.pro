@@ -1,6 +1,7 @@
 TEMPLATE = app
 
-QT += qml quick core-private
+QT += qml quick core
+
 CONFIG += c++11
 
 
