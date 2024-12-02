@@ -5,6 +5,8 @@
 
 #include <documentfile.h>
 
+using namespace android;
+
 class FileOperations : public QObject
 {
     Q_OBJECT
@@ -14,12 +16,36 @@ public:
     Q_INVOKABLE void writeFile(const QString &data);
     Q_INVOKABLE void readFile();
 
+    bool hasSingleUri() const;
+    bool hasTreeUri() const;
+    bool hasParent() const;
+    QByteArray fileContent() const;
+    QString fileName() const;
+    QString url() const;
+
+
+public slots:
+    void newFile(const QString &fileName);
+    void openFile(const QStringList &mimeTypes = {"*/*"});
+    void openDir();
+    void saveContent(const QByteArray &content);
+    void newTreeFile(const QString &name);
+    void newTreeFolder(const QString &name);
+    void openTreeItem(int idx);
 
 signals:
 
 private:
+    void openTree(const provider::DocumentFilePtr &tree = {});
+    void openUri(const net::Uri &uri);
+
+private:
     QString filePath;
     QString uri;
+
+    net::Uri m_uri;
+    provider::DocumentFilePtr m_tree;
+    std::vector<provider::DocumentFilePtr> m_files;
 };
 
 #endif // FILEOPERATIONS_H
