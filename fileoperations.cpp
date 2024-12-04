@@ -14,9 +14,9 @@ using namespace android::content;
 FileOperations::FileOperations(QObject *parent) : QObject(parent)
 {
     //filePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/testFile.txt";
-    filePath = "content://com.android.externalstorage.documents/tree/primary%3Ahey/testfile.txt";
-    //uri = "content://com.android.externalstorage.documents/tree/primary%3Ahey/testfile.txt";
-    //uri = "content://com.android.externalstorage.documents/document/primary%3Ahey%2Ftestfile.txt";
+    //filePath = "content://com.android.externalstorage.documents/tree/primary%3Ahey/testfile.txt";
+    //filePath = "content://com.android.externalstorage.documents/tree/primary%3Ahey/testfile.txt";
+    //filePath = "content://com.android.externalstorage.documents/document/primary%3Ahey%2Ftestfile.txt";
     //filePath = "content://com.android.externalstorage.documents/document/primary%3Ahey%2Ftestfile.txt";
     //filePath = "/storage/emulated/0/hey/testfile.txt";
 }
@@ -69,10 +69,12 @@ bool FileOperations::hasSingleUri() const
     return m_uri.isValid() && DocumentsContract::isDocumentUri(m_uri) && (!m_tree || m_uri != m_tree->uri());
 }
 
-QByteArray FileOperations::fileContent() const
+void FileOperations::fileContent()
 {
-    return hasSingleUri() ? ContentResolver::instance().openUri(m_uri, QIODevice::ReadOnly)->readAll()
-                          : QByteArray{};
+    QByteArray arr;
+    if(hasSingleUri()) arr = ContentResolver::instance().openUri(m_uri, QIODevice::ReadOnly)->readAll();
+    else QByteArray{};
+    qDebug() << arr;
 }
 
 void FileOperations::openDir()
@@ -125,7 +127,7 @@ void FileOperations::openTree(const DocumentFilePtr &tree)
 void FileOperations::openUri(const net::Uri &uri)
 {
     m_uri = uri;
-    QByteArray arr = fileContent();
+    fileContent();
 }
 
 QString FileOperations::fileName() const

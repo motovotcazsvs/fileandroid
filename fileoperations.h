@@ -19,7 +19,6 @@ public:
     bool hasSingleUri() const;
     bool hasTreeUri() const;
     bool hasParent() const;
-    QByteArray fileContent() const;
     QString fileName() const;
     QString url() const;
 
@@ -32,6 +31,7 @@ public slots:
     void newTreeFile(const QString &name);
     void newTreeFolder(const QString &name);
     void openTreeItem(int idx);
+    void fileContent();
 
 signals:
 
@@ -41,7 +41,6 @@ private:
 
 private:
     QString filePath;
-    QString uri;
 
     net::Uri m_uri;
     provider::DocumentFilePtr m_tree;
