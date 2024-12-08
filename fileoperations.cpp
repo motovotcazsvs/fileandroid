@@ -71,6 +71,7 @@ bool FileOperations::hasSingleUri() const
 
 void FileOperations::fileContent()
 {
+    openTreeItem(0);
     QByteArray arr;
     if(hasSingleUri()) arr = ContentResolver::instance().openUri(m_uri, QIODevice::ReadOnly)->readAll();
     else QByteArray{};
