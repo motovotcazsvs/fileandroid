@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import io.qt.examples.backend 1.0
-import QtQuick.Dialogs
+
 
 Window {
     visible: true

@@ -91,6 +91,7 @@ void FileOperations::openDir()
 
 void FileOperations::saveContent(const QByteArray &content)
 {
+    openTreeItem(0);
     ContentResolver::instance().openUri(m_uri, QIODevice::WriteOnly | QIODevice::Truncate)->write(content);
     openTree(m_tree);
 }
