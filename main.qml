@@ -33,7 +33,7 @@ Window {
 
         Button {
             text: "Read"
-            onClicked: fileOperations.fileContent();
+            onClicked: fileOperations.openTreeItem(0);
         }
 
         Button {

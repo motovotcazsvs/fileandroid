@@ -13,6 +13,7 @@ using namespace android::content;
 
 FileOperations::FileOperations(QObject *parent) : QObject(parent)
 {
+    qDebug() << "FileOperations()";
     //filePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/testFile.txt";
     //filePath = "content://com.android.externalstorage.documents/tree/primary%3Ahey/testfile.txt";
     //filePath = "content://com.android.externalstorage.documents/tree/primary%3Ahey/testfile.txt";
@@ -35,6 +36,7 @@ void FileOperations::createFile()
 
 void FileOperations::writeFile(const QString &data)
 {
+
     QFile file(filePath);
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QTextStream out(&file);
@@ -66,24 +68,27 @@ void FileOperations::readFile()
 
 bool FileOperations::hasSingleUri() const
 {
+    qDebug() << "hasSingleUri()";
     return m_uri.isValid() && DocumentsContract::isDocumentUri(m_uri) && (!m_tree || m_uri != m_tree->uri());
 }
 
 bool FileOperations::hasTreeUri() const
 {
+    qDebug() << "hasTreeUri()";
     return m_tree.get();
 }
 
 bool FileOperations::hasParent() const
 {
+    qDebug() << "hasParent()";
     return m_tree && m_tree->parent();
 }
 
 QByteArray FileOperations::fileContent() const
 {
-
-        QByteArray b = hasSingleUri() ? ContentResolver::instance().openUri(m_uri, QIODevice::ReadOnly)->readAll()
-                          : QByteArray{};
+    qDebug() << "fileContent()";
+    QByteArray b = hasSingleUri() ? ContentResolver::instance().openUri(m_uri, QIODevice::ReadOnly)->readAll()
+                      : QByteArray{};
 
     qDebug() << "baba" << b;
     return b;
@@ -91,6 +96,7 @@ QByteArray FileOperations::fileContent() const
 
 void FileOperations::newFile(const QString &fileName)
 {
+    qDebug() << "newFile()";
     SharedStorage::instance().createDocument(1,
         [this](int code, net::Uri uri){
             if (code != 1 || !uri.isValid())
@@ -103,6 +109,7 @@ void FileOperations::newFile(const QString &fileName)
 
 void FileOperations::openFile(const QStringList &mimeTypes)
 {
+    qDebug() << "openFile()";
     SharedStorage::instance().openDocument(2,
         [this](int code, net::Uri uri){
             if (code != 2 || !uri.isValid())
@@ -115,6 +122,7 @@ void FileOperations::openFile(const QStringList &mimeTypes)
 
 void FileOperations::openDir()
 {
+    qDebug() << "openDir()";
     SharedStorage::instance().openDocumentTree(3,
        [this](int code, net::Uri uri){
            if (code != 3 || !uri.isValid())
@@ -127,18 +135,21 @@ void FileOperations::openDir()
 
 void FileOperations::remove()
 {
+    qDebug() << "remove()";
     DocumentsContract::removeDocument(m_uri);
     openUri({});
 }
 
 void FileOperations::saveContent(const QByteArray &content)
 {
+    qDebug() << "saveContent()";
     ContentResolver::instance().openUri(m_uri, QIODevice::WriteOnly | QIODevice::Truncate)->write(content);
     openTree(m_tree);
 }
 
 void FileOperations::cdUp()
 {
+    qDebug() << "cdUp()";
     if (!m_tree->parent())
         return;
     const auto doc = m_tree->parent();
@@ -148,18 +159,21 @@ void FileOperations::cdUp()
 
 void FileOperations::newTreeFile(const QString &name)
 {
+    qDebug() << "newTreeFile()";
     m_tree->createFile("application/octet-stream", name);
     openTree(m_tree);
 }
 
 void FileOperations::newTreeFolder(const QString &name)
 {
+    qDebug() << "newTreeFolder()";
     m_tree->createDirectory(name);
     openTree(m_tree);
 }
 
 void FileOperations::openTreeItem(int idx)
 {
+    qDebug() << "openTreeItem()";
     if (idx < 0 || idx >= int(m_files.size()))
         return;
     const auto doc = m_files[idx];
@@ -170,6 +184,7 @@ void FileOperations::openTreeItem(int idx)
 
 void FileOperations::removeTreeItem(int idx)
 {
+    qDebug() << "removeTreeItem()";
     if (idx < 0 || idx >= int(m_files.size()))
         return;
     m_files[idx]->remove();
@@ -179,6 +194,7 @@ void FileOperations::removeTreeItem(int idx)
 
 void FileOperations::renameTreeItem(int idx, const QString &newName)
 {
+    qDebug() << "renameTreeItem()";
     if (idx < 0 || idx >= int(m_files.size()))
         return;
     m_files[idx]->rename(newName);
@@ -188,6 +204,7 @@ void FileOperations::renameTreeItem(int idx, const QString &newName)
 
 void FileOperations::openTree(const DocumentFilePtr &tree)
 {
+    qDebug() << "openTree()";
     if ((m_tree = tree))
         m_files = m_tree->listFiles();
     else
@@ -197,18 +214,20 @@ void FileOperations::openTree(const DocumentFilePtr &tree)
             return a->name() < b->name();
         return a->isDirectory();
     });
-
+    qDebug() << "dohodeeeeeeeee";
     emit treeDocChanged();
 }
 
 void FileOperations::openUri(const net::Uri &uri)
 {
+    qDebug() << "openUri()";
     m_uri = uri;
-    //emit uriChanged();
+    emit uriChanged();
 }
 
 QString FileOperations::fileName() const
 {
+    qDebug() << "fileName()";
     return m_uri.isValid() ? hasSingleUri() ? DocumentFile::fromSingleUri(m_uri)->name()
                                             : DocumentFile::fromTreeUri(m_uri)->name()
                            : QString{};
@@ -216,5 +235,6 @@ QString FileOperations::fileName() const
 
 QString FileOperations::url() const
 {
+    qDebug() << "url()";
     return m_uri.isValid() ? m_uri.toString() : QString{};
 }
