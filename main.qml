@@ -20,7 +20,7 @@ Window {
         Button {
             text: "Create"
             onClicked: {
-                fileOperations.newTreeFile("testhello.txt")
+                fileOperations.createFile("testhello.txt")
             }
         }
 
@@ -34,9 +34,7 @@ Window {
         Button {
             text: "Read"
             onClicked: {
-
-                fileOperations.openTreeItem(0);
-                fileOperations.fileContent();
+                fileOperations.readFile();
             }
         }
 

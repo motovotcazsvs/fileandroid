@@ -19,7 +19,7 @@ class FileOperations : public QObject
 
 public:
     explicit FileOperations(QObject *parent = nullptr);
-    Q_INVOKABLE void createFile();
+    Q_INVOKABLE void createFile(QString);
     Q_INVOKABLE void writeFile(const QString &data);
     Q_INVOKABLE void readFile();
 
