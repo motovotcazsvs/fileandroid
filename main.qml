@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import io.qt.examples.backend 1.0
-
+import QtQuick.Dialogs
 
 Window {
     visible: true
@@ -33,7 +33,11 @@ Window {
 
         Button {
             text: "Read"
-            onClicked: fileOperations.openTreeItem(0);
+            onClicked: {
+
+                fileOperations.openTreeItem(0);
+                fileOperations.fileContent();
+            }
         }
 
         Button {
@@ -44,7 +48,7 @@ Window {
         }
 
         Button {
-            text: "Permission2"
+            text: "empty"
             onClicked: {
 
             }

@@ -1,5 +1,4 @@
 #include "FileOperations.h"
-#include <QStandardPaths>
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
@@ -69,6 +68,7 @@ void FileOperations::readFile()
 bool FileOperations::hasSingleUri() const
 {
     qDebug() << "hasSingleUri()";
+    qDebug() << m_uri.isValid() << DocumentsContract::isDocumentUri(m_uri) << (!m_tree || m_uri != m_tree->uri());
     return m_uri.isValid() && DocumentsContract::isDocumentUri(m_uri) && (!m_tree || m_uri != m_tree->uri());
 }
 
@@ -87,12 +87,15 @@ bool FileOperations::hasParent() const
 QByteArray FileOperations::fileContent() const
 {
     qDebug() << "fileContent()";
+    qDebug() << "hasSingleUri" << hasSingleUri();
+    QByteArray a = ContentResolver::instance().openUri(m_uri, QIODevice::ReadOnly)->readAll();
     QByteArray b = hasSingleUri() ? ContentResolver::instance().openUri(m_uri, QIODevice::ReadOnly)->readAll()
                       : QByteArray{};
 
-    qDebug() << "baba" << b;
+    qDebug() << "baba" << b << a;
     return b;
 }
+
 
 void FileOperations::newFile(const QString &fileName)
 {
@@ -222,6 +225,8 @@ void FileOperations::openUri(const net::Uri &uri)
 {
     qDebug() << "openUri()";
     m_uri = uri;
+
+
     emit uriChanged();
 }
 
