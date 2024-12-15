@@ -27,7 +27,7 @@ Window {
         Button {
             text: "Write"
             onClicked: {
-                fileOperations.saveContent("This is some test data.");
+                fileOperations.writeFile("This is some test data.");
             }
         }
 

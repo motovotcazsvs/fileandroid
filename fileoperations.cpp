@@ -26,8 +26,7 @@ void FileOperations::createFile(QString name)
 void FileOperations::writeFile(const QString &data)
 {
     qDebug() << "writeFile()";
-    //openTreeItem(0);
-    //qDebug() << "hasSingleUri" << hasSingleUri();
+    openTreeItem(0);
     saveContent(data.toUtf8());
 }
 
@@ -110,6 +109,9 @@ void FileOperations::openDir()
            openTree(DocumentFile::fromTreeUri(uri));
            openUri(uri);
        });
+
+    qDebug() << "fileName" << fileName();
+    qDebug() << "url" << url();
 }
 
 void FileOperations::remove()
@@ -193,7 +195,7 @@ void FileOperations::openTree(const DocumentFilePtr &tree)
             return a->name() < b->name();
         return a->isDirectory();
     });
-    qDebug() << "dohodeeeeeeeee";
+
     emit treeDocChanged();
 }
 
