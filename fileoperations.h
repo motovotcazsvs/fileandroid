@@ -22,11 +22,11 @@ public:
     Q_INVOKABLE void createFile(QString);
     Q_INVOKABLE void writeFile(const QString &data);
     Q_INVOKABLE void readFile();
-    Q_INVOKABLE void sizeFile(int);
+    Q_INVOKABLE void sizeFile();
     Q_INVOKABLE void countFiles();
     Q_INVOKABLE void checkFiles();
-    Q_INVOKABLE void getNameFile(int);
-    Q_INVOKABLE void getNameFolder(int);
+    Q_INVOKABLE void getNameFile();
+    Q_INVOKABLE void getNameFolder();
     Q_INVOKABLE void getAllFiles();
     Q_INVOKABLE void getAllFolders();
     Q_INVOKABLE void geturl();
@@ -63,7 +63,6 @@ private:
     void openUri(const net::Uri &uri);
 
 private:
-    QString filePath;
     net::Uri m_uri;
     provider::DocumentFilePtr m_tree;
     std::vector<provider::DocumentFilePtr> m_files;

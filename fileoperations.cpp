@@ -38,57 +38,63 @@ void FileOperations::readFile()
 }
 
 
-void FileOperations::sizeFile(int numfile)
+void FileOperations::sizeFile()
 {
     qDebug() << "sizeFile()";
-    int size;
-
-    qDebug() << "sizeFile" <<  size;
+    quint64 size = m_files[0]->length();
+    qDebug() << "sizeFile" << size;
 }
 
 void FileOperations::countFiles()
 {
     qDebug() << "countFiles()";
-    int count;
-
-    qDebug() << "countFiles" <<  count;
+    int count = m_files.size();
+    qDebug() << "countFiles" << count;
 }
+
 void FileOperations::checkFiles()
 {
     qDebug() << "checkFiles()";
-    bool exists;
-
-    qDebug() << "checkFiles" <<  exists;
+    for(const auto& file : m_files){
+        if("testhello.txt" == file->name() && file->isDirectory() == false) qDebug() << "checkFiles" << true;
+        else qDebug() << "checkFiles" << false;
+    }
 }
 
-void FileOperations::getNameFile(int numfile)
+void FileOperations::getNameFile()
 {
     qDebug() << "getNameFile()";
-    qDebug() << "getNameFile";
+    qDebug() << "getNameFile" << m_files[0]->name();
 }
 
-void FileOperations::getNameFolder(int numfolder)
+void FileOperations::getNameFolder()
 {
     qDebug() << "getNameFolder()";
-    qDebug() << "getNameFolder";
+    if(m_files[0]->isDirectory()){
+        qDebug() << "getNameFolder" << m_files[0]->name();
+    }
 }
 
 void FileOperations::getAllFiles()
 {
     qDebug() << "getAllFiles()";
-    qDebug() << "getAllFiles";
+    for(const auto& file : m_files){
+        if(file->isDirectory() == false) qDebug() << "getAllFiles" << file->name();
+    }
 }
 
 void FileOperations::getAllFolders()
 {
     qDebug() << "getAllFolders()";
-    qDebug() << "getAllFolders";
+    for(const auto& file : m_files){
+        if(file->isDirectory() == true) qDebug() << "getAllFolders" << file->name();
+    }
 }
 
 void FileOperations::geturl()
 {
     qDebug() << "geturl()";
-    qDebug() << "geturl";
+    qDebug() << "geturl" << (m_uri.isValid() ? m_uri.toString() : QString{});
 }
 
 
