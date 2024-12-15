@@ -22,6 +22,14 @@ public:
     Q_INVOKABLE void createFile(QString);
     Q_INVOKABLE void writeFile(const QString &data);
     Q_INVOKABLE void readFile();
+    Q_INVOKABLE void sizeFile(int);
+    Q_INVOKABLE void countFiles();
+    Q_INVOKABLE void checkFiles();
+    Q_INVOKABLE void getNameFile(int);
+    Q_INVOKABLE void getNameFolder(int);
+    Q_INVOKABLE void getAllFiles();
+    Q_INVOKABLE void getAllFolders();
+    Q_INVOKABLE void geturl();
 
     bool hasSingleUri() const;
     bool hasTreeUri() const;

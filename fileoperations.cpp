@@ -38,6 +38,59 @@ void FileOperations::readFile()
 }
 
 
+void FileOperations::sizeFile(int numfile)
+{
+    qDebug() << "sizeFile()";
+    int size;
+
+    qDebug() << "sizeFile" <<  size;
+}
+
+void FileOperations::countFiles()
+{
+    qDebug() << "countFiles()";
+    int count;
+
+    qDebug() << "countFiles" <<  count;
+}
+void FileOperations::checkFiles()
+{
+    qDebug() << "checkFiles()";
+    bool exists;
+
+    qDebug() << "checkFiles" <<  exists;
+}
+
+void FileOperations::getNameFile(int numfile)
+{
+    qDebug() << "getNameFile()";
+    qDebug() << "getNameFile";
+}
+
+void FileOperations::getNameFolder(int numfolder)
+{
+    qDebug() << "getNameFolder()";
+    qDebug() << "getNameFolder";
+}
+
+void FileOperations::getAllFiles()
+{
+    qDebug() << "getAllFiles()";
+    qDebug() << "getAllFiles";
+}
+
+void FileOperations::getAllFolders()
+{
+    qDebug() << "getAllFolders()";
+    qDebug() << "getAllFolders";
+}
+
+void FileOperations::geturl()
+{
+    qDebug() << "geturl()";
+    qDebug() << "geturl";
+}
+
 
 
 bool FileOperations::hasSingleUri() const
